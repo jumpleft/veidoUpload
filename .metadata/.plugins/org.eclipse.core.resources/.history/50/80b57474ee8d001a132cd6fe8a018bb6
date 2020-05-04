@@ -1,0 +1,21 @@
+package org.magnum.dataup;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.magnum.dataup.model.Video;
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class PostControler {
+	
+	List<Video> videos = new ArrayList<Video>();
+
+	List<Post> posts = new ArrayList<Post>();
+
+}
+
+	@GetMapping(value = "/videos")
+	public List<Video> getVideos() {
+		return videos;
+}

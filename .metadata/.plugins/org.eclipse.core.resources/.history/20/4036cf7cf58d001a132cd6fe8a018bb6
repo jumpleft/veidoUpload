@@ -1,0 +1,61 @@
+package org.magnum.dataup;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
+
+import org.magnum.dataup.model.Video;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+@Controller
+public class PostControler {
+	
+	//private List<Video> videosontheArray = new ArrayList<Video>();
+
+	//private List<Post> posts = new ArrayList<Post>();
+	
+    private static final AtomicLong currentId = new AtomicLong(0L);
+	
+	private Map<Long,Video> videos = new HashMap<Long, Video>();
+
+  	public Video save(Video entity) {
+		checkAndSetId(entity);
+		videos.put(entity.getId(), entity);
+		return entity;
+	}
+	
+	
+	
+	
+	
+
+
+
+	@RequestMapping(value = "/video", method = RequestMethod.GET)
+	public Map<Long,Video> getVideos() {
+		return videos;
+	}
+	
+	@RequestMapping(value = "/video", method = RequestMethod.POST)
+	public Video setVideos(Video v) {
+		checkAndSetId(v);
+		videos.put(v.getId(), v);
+		return v;
+	}
+	
+	private void checkAndSetId(Video entity) {
+		if(entity.getId() == 0){
+			entity.setId(currentId.incrementAndGet());
+		}	
+	}
+	
+	
+	
+			
+		
+}
